@@ -248,8 +248,10 @@ void FullSystem::printResult(std::string file)
 	boost::unique_lock<boost::mutex> crlock(shellPoseMutex);
 
 	std::ofstream myfile;
+	//myfile.setf(ios::fixed, ios::floatfield);
+	myfile.precision(15);
+	//myfile << std::setprecision(5);
 	myfile.open (file.c_str());
-	myfile << std::setprecision(15);
 
 	for(FrameShell* s : allFrameHistory)
 	{
@@ -258,11 +260,13 @@ void FullSystem::printResult(std::string file)
 		if(setting_onlyLogKFPoses && s->marginalizedAt == s->id) continue;
 
 		myfile << s->timestamp <<
-			" " << s->camToWorld.translation().transpose()<<
+			" " << s->camToWorld.translation().x()<<
+			" " << s->camToWorld.translation().y()<<
+			" " << s->camToWorld.translation().z()<<
 			" " << s->camToWorld.so3().unit_quaternion().x()<<
 			" " << s->camToWorld.so3().unit_quaternion().y()<<
 			" " << s->camToWorld.so3().unit_quaternion().z()<<
-			" " << s->camToWorld.so3().unit_quaternion().w() << "\n";
+			" " << s->camToWorld.so3().unit_quaternion().w()<< std::endl;
 	}
 	myfile.close();
 }

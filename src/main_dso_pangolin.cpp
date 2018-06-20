@@ -96,6 +96,7 @@ void exitThread()
 void settingsDefault(int preset)
 {
 	printf("\n=============== PRESET Settings: ===============\n");
+	printf("\n============== ITS BRITNEY BITCH: ==============\n");
 	if(preset == 0 || preset == 1)
 	{
 		printf("DEFAULT settings:\n"
